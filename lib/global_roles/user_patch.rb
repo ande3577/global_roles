@@ -30,22 +30,18 @@ module GlobalRoles
       end
 
       def roles_for_project_with_global_roles(project)
-        add_global_roles(roles_for_project_without_global_roles(project), project)
-      end
-
-      def add_global_roles(roles, project)
-        roles = (roles + self.global_roles).uniq if should_add_global_roles?(project)
+        roles = roles_for_project_without_global_roles(project)
+        if should_add_global_roles?(project)
+          roles += global_roles_with_groups
+          roles.uniq!
+        end
         roles
-      end
-
-      def should_add_global_roles?(project)
-        project && project.is_public? && !project.archived?
       end
 
       def allowed_to_with_global_roles?(action, context, options = {}, &block)
         return true if allowed_to_without_global_roles?(action, context, options, &block)
         if context.nil? && options[:global]
-          self.global_roles.any? {|role|
+          global_roles_with_groups.any? {|role|
             role.allowed_to?(action) &&
             (block_given? ? yield(role, self) : true)
           }
@@ -54,6 +50,14 @@ module GlobalRoles
         end
       end
 
+      private
+      def should_add_global_roles?(project)
+        project && project.is_public? && !project.archived?
+      end
+
+      def global_roles_with_groups
+        self.global_roles + self.groups.map { |group| group.global_roles.all }.flatten
+      end
     end
 
   end
