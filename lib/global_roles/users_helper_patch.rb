@@ -15,7 +15,7 @@ module GlobalRoles
     module InstanceMethods 
       def user_settings_tabs_with_global_roles
         tabs = user_settings_tabs_without_global_roles
-        tabs.push({:name => 'users-global-roles', :partial => 'roles/global_roles', :label => :label_global_roles})
+        tabs.push({:name => 'users-global-roles', :partial => 'roles/global_roles', :label => :label_global_roles})  if User.current.admin?
         tabs
       end
     end
