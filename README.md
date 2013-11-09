@@ -11,15 +11,7 @@ It adds Global Roles tab to Users and Groups which makes possible of User-to-Rol
 ![Interface](https://github.com/dkuk/global_roles/raw/master/screenshots/interface.png "Interface")
 ![Interface2](https://github.com/dkuk/global_roles/raw/master/screenshots/interface2.png "Interface2")
 
-It could be used for global authentication to actions in plugins which does not bound to projects.
-This plugin uses jQuery.
-
-How to use:
- * __User.current.global_permission_to?(controller, action)__ - users method. Provides of check privelegies for any user
- * __authorized_globaly?__ - helper for applications before_filer, which check privelegies for current controller and action
- * __authorized_globaly_to?(controller, action)__ - helper, which check privelegies for pointed controller and action for current user
-
-Methods always returns true for Admin users
+After adding a global role, it will be respected for all redmine permissions.
 
 #### Installation
 To install plugin, go to the folder "plugins" in root directory of Redmine.

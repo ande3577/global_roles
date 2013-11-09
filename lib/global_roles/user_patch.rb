@@ -17,18 +17,6 @@ module GlobalRoles
 
     module InstanceMethods
 
-      def global_permission_to?(controller, action)
-        return true if admin? 
-                
-        roles = (global_roles + groups.collect {|gr| gr.global_roles}.flatten).uniq
-        roles << Role.anonymous unless self.logged?
-
-        not roles.detect { |r| 
-          r.allowed_to?({:controller => controller, :action => action}) 
-        }.nil?
-     
-      end
-
       def roles_for_project_with_global_roles(project)
         roles = roles_for_project_without_global_roles(project)
         if should_add_global_roles?(project)

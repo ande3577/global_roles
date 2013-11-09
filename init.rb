@@ -14,6 +14,4 @@ Rails.application.config.to_prepare do
   UsersController.send(:include, GlobalRoles::UsersControllerPatch)
   GroupsHelper.send(:include, GlobalRoles::GroupsHelperPatch)
   GroupsController.send(:include, GlobalRoles::GroupsControllerPatch)  
-
-  ApplicationController.send(:include, GlobalRoles::ApplicationControllerPatch)
 end
