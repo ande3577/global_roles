@@ -68,6 +68,12 @@ class UserTest < ActiveSupport::TestCase
   	assert @user.allowed_to?(:add_project, nil, :global => true)
   end
 
+  def test_destroys_global_roles_when_user_destroyed
+    assert_difference('GlobalRole.count', -1) do
+      @user.destroy
+    end 
+  end
+
   private
   def change_to_group_role
     @x_role.principal = @group
