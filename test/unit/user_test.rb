@@ -1,7 +1,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class UserTest < ActiveSupport::TestCase
-  fixtures :projects, :users, :roles, :enabled_modules, :groups_users
+  fixtures :projects, :users, :roles, :enabled_modules, :groups_users, :members, :member_roles
   
   def setup
   	@admin = User.where(:admin => true).first
