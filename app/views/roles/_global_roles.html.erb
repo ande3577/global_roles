@@ -21,7 +21,7 @@
         <tr id="role-<%= rel.id %>" class="<%= cycle 'odd', 'even' %>">
           <td class="role-name"><%= link_to(rel.role.name, edit_role_path(rel.role)) %></td>
           <td class="buttons">
-            <%= delete_link( "destroy_global_role/#{rel.id}", :remote => true ) %>
+            <%= delete_link( "destroy_global_role/#{rel.id}", :remote => true )  if !rel.inherited_role? %>
           </td>
         </tr>
       <% end %>

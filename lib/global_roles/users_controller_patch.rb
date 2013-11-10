@@ -15,7 +15,8 @@ module GlobalRoles
 
       def destroy_global_role
         @user = User.find(params[:id])
-        GlobalRole.find(params[:rid]).destroy
+        global_role = GlobalRole.find(params[:rid])
+        global_role.destroy if !global_role.inherited_role?
         respond_to do |format|
           format.html { redirect_to :controller => 'users', :action => 'edit', :tab => 'users-global-roles' }
           format.js
