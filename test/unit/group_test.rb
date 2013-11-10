@@ -1,7 +1,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class GroupTest < ActiveSupport::TestCase
-  fixtures :users, :roles, :groups_users, :members, :member_roles
+  fixtures :users, :roles, :groups_users, :members, :member_roles, :issue_categories, :projects
   
   def setup
   	@admin = User.where(:admin => true).first
@@ -22,6 +22,13 @@ class GroupTest < ActiveSupport::TestCase
     assert !@user.global_roles.include?(@global_role)
   end
 
+  def test_destroys_global_roles_when_group_destroyed
+    clear_users
+    assert_difference('GlobalRole.count', -1) do
+      @group.destroy
+    end 
+  end
+
   private
   def add_user_to_group(user = @user)
     @group.users << user
@@ -33,6 +40,11 @@ class GroupTest < ActiveSupport::TestCase
     @group.users.delete(user)
     @group.save!
     user.reload
+  end
+  
+  def clear_users
+    @group.users.clear
+    @group.save!
   end
 
 end
