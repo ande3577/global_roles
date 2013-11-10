@@ -5,7 +5,7 @@ module GlobalRoles
       base.send(:include, InstanceMethods)  
   
       base.class_eval do
-        has_many :x_roles, :class_name => 'GlobalRole', :foreign_key => 'user_id'
+        has_many :x_roles, :class_name => 'GlobalRole', :foreign_key => 'user_id', :dependent => :destroy
         has_many :global_roles, :source => :role, :through => :x_roles
         alias_method_chain :user_added, :global_roles          
         alias_method_chain :user_removed, :global_roles
