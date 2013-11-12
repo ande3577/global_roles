@@ -33,6 +33,12 @@ Perform plugin migrations (make sure performing command in the root installation
 
 Restart your web-server.
 
+To add support for the source control permissions integrations, 
+
+1. Follow the instructions at [HowTo configure Redmine for advanced git integration](http://www.redmine.org/projects/redmine/wiki/HowTo_configure_Redmine_for_advanced_git_integration#Configuring-Apache)
+2. Use the _Redmine.pm_ file included in the _extra/svn_ folder in place of the one included with Redmine
+
+
 #### Supported Redmine, Ruby and Rails versions.
 
 Plugin aims to support and is tested under the following Redmine implementations:
